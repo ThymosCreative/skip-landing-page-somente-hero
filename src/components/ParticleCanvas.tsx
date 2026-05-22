@@ -14,9 +14,19 @@ interface Particle {
   dvy: number // drift velocity y
 }
 
-const COLORS = ['#4F46E5', '#6B63F1', '#8881F8', '#AAA5FC', '#4038CA']
 const PARTICLE_COUNT = 180
 const INTERACTION_RADIUS = 120
+
+const getParticleColor = () => {
+  const rand = Math.random()
+  if (rand < 0.5) {
+    return Math.random() < 0.5 ? '#6B63F1' : '#8881F8'
+  } else if (rand < 0.8) {
+    return '#4F46E5'
+  } else {
+    return '#AAA5FC'
+  }
+}
 
 export function ParticleCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -52,18 +62,31 @@ export function ParticleCanvas() {
         const x = Math.random() * window.innerWidth
         const y = Math.random() * window.innerHeight
 
+        const alpha = Math.random() * 0.85 + 0.15 // 0.15 to 1.0
+
+        let dvx, dvy
+        if (alpha < 0.3) {
+          const speedX = Math.random() * 0.05 + 0.1 // 0.1 to 0.15
+          const speedY = Math.random() * 0.05 + 0.1
+          dvx = Math.random() < 0.5 ? speedX : -speedX
+          dvy = Math.random() < 0.5 ? speedY : -speedY
+        } else {
+          dvx = (Math.random() - 0.5) * 0.6
+          dvy = (Math.random() - 0.5) * 0.6
+        }
+
         particlesRef.current.push({
           lx: x,
           ly: y,
           x: x,
           y: y,
-          width: Math.random() * 8 + 6, // 6px to 14px
+          width: Math.random() * 14 + 4, // 4px to 18px
           height: Math.random() * 1 + 2, // 2px to 3px
           angle: (Math.random() - 0.5) * (Math.PI / 2), // -45deg to 45deg
-          color: COLORS[Math.floor(Math.random() * COLORS.length)],
-          alpha: Math.random() * 0.6 + 0.3, // 0.3 to 0.9
-          dvx: (Math.random() - 0.5) * 0.6, // max speed roughly 0.3px per frame
-          dvy: (Math.random() - 0.5) * 0.6,
+          color: getParticleColor(),
+          alpha: alpha,
+          dvx: dvx,
+          dvy: dvy,
         })
       }
     }

@@ -4,7 +4,14 @@ import { ArrowRight, Play } from 'lucide-react'
 
 const Index = () => {
   return (
-    <div className="relative flex-1 flex flex-col items-center justify-center overflow-hidden bg-[#FFFFFF] w-full h-full">
+    <div
+      className="relative flex-1 flex flex-col items-center justify-center overflow-hidden w-full h-full min-h-screen"
+      style={{
+        background:
+          'radial-gradient(ellipse 80% 60% at 50% 40%, #EEF2FF 0%, #F5F3FF 30%, #FFFFFF 70%)',
+        boxShadow: 'inset 0 0 120px 40px rgba(238, 242, 255, 0.6)',
+      }}
+    >
       {/* Interactive Dash Particle System */}
       <ParticleCanvas />
 
@@ -17,7 +24,8 @@ const Index = () => {
 
         {/* Headline */}
         <h1 className="animate-fade-in-up fill-mode-both delay-100 text-[40px] sm:text-[56px] lg:text-[68px] font-extrabold tracking-tight leading-[1.1] mb-6">
-          <span className="text-[#1E1B4B] block">O criador de Sistemas Internos</span>
+          <span className="text-[#1E1B4B] block mb-[6px]">O criador de</span>
+          <span className="text-[#1E1B4B] block">Sistemas Internos</span>
           <span className="text-[#4F46E5] block">mais intuitivo do mundo</span>
         </h1>
 
