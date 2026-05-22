@@ -12,10 +12,12 @@ const Index = () => {
 
     let mouseX = -9999
     let mouseY = -9999
-    let smoothX = -9999
-    let smoothY = -9999
+    let smoothX = 50
+    let smoothY = 50
     let velX = 0
     let velY = 0
+    let autoAngle = 0
+    let autoRadius = 180
     let animationFrameId: number
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -25,22 +27,30 @@ const Index = () => {
     }
 
     const updateLoop = () => {
-      if (mouseX !== -9999) {
-        if (smoothX === -9999) {
-          smoothX = mouseX
-          smoothY = mouseY
-        }
+      autoAngle += 0.003
 
-        velX += (mouseX - smoothX) * 0.04
-        velY += (mouseY - smoothY) * 0.04
-        velX *= 0.82
-        velY *= 0.82
-        smoothX += velX
-        smoothY += velY
+      const autoX = 50 + Math.cos(autoAngle) * autoRadius
+      const autoY = 50 + Math.sin(autoAngle * 0.7) * autoRadius * 0.6
 
-        hero.style.setProperty('--ring-x', `${smoothX}`)
-        hero.style.setProperty('--ring-y', `${smoothY}`)
+      let targetX, targetY
+
+      if (mouseX < 0) {
+        targetX = autoX
+        targetY = autoY
+      } else {
+        targetX = mouseX * 0.6 + autoX * 0.4
+        targetY = mouseY * 0.6 + autoY * 0.4
       }
+
+      velX += (targetX - smoothX) * 0.012
+      velY += (targetY - smoothY) * 0.012
+      velX *= 0.88
+      velY *= 0.88
+      smoothX += velX
+      smoothY += velY
+
+      hero.style.setProperty('--ring-x', `${smoothX}`)
+      hero.style.setProperty('--ring-y', `${smoothY}`)
 
       animationFrameId = requestAnimationFrame(updateLoop)
     }
