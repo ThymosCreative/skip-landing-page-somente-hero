@@ -26,6 +26,11 @@ const Index = () => {
       mouseY = ((e.clientY - rect.top) / rect.height) * 100
     }
 
+    const handleMouseLeave = () => {
+      mouseX = 50
+      mouseY = 50
+    }
+
     const updateLoop = () => {
       autoAngle += 0.0008
 
@@ -56,10 +61,12 @@ const Index = () => {
     }
 
     hero.addEventListener('mousemove', handleMouseMove)
+    hero.addEventListener('mouseleave', handleMouseLeave)
     animationFrameId = requestAnimationFrame(updateLoop)
 
     return () => {
       hero.removeEventListener('mousemove', handleMouseMove)
+      hero.removeEventListener('mouseleave', handleMouseLeave)
       cancelAnimationFrame(animationFrameId)
     }
   }, [])
