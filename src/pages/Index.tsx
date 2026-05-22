@@ -1,6 +1,7 @@
 import { ParticleCanvas } from '@/components/ParticleCanvas'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Play, Hexagon } from 'lucide-react'
+import { ArrowRight, Play } from 'lucide-react'
+import skipLogo from '@/assets/image-dd6eb.png'
 
 const Index = () => {
   return (
@@ -17,12 +18,15 @@ const Index = () => {
       {/* Hero Content Cluster (Centered Vertically ~34vh-38vh) */}
       <div
         className="relative z-10 flex flex-col items-center text-center px-4 w-full max-w-[700px]"
-        style={{ marginTop: '36vh' }}
+        style={{ marginTop: '38vh' }}
       >
         {/* Logo Lockup */}
-        <div className="animate-fade-in-up fill-mode-both flex items-center justify-center gap-[6px] text-[#0F0F1A] mb-3">
-          <Hexagon className="w-[16px] h-[16px] fill-[#0F0F1A]" />
-          <span className="font-bold text-[14px] uppercase tracking-wider">Skip</span>
+        <div className="animate-fade-in-up fill-mode-both flex items-center justify-center mb-4">
+          <img
+            src={skipLogo}
+            alt="Skip Logo"
+            className="h-[32px] sm:h-[40px] w-auto object-contain"
+          />
         </div>
 
         {/* Headline */}
