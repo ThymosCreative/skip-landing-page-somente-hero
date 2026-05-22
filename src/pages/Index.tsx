@@ -17,7 +17,7 @@ const Index = () => {
 
       {/* Hero Content Cluster (Centered Vertically ~34vh-38vh) */}
       <div
-        className="relative z-10 flex flex-col items-center text-center px-4 w-full max-w-[700px]"
+        className="relative z-10 flex flex-col items-center text-center px-4 w-full max-w-[1100px]"
         style={{ marginTop: '38vh' }}
       >
         {/* Logo Lockup */}
@@ -30,7 +30,7 @@ const Index = () => {
         </div>
 
         {/* Headline */}
-        <h1 className="animate-fade-in-up fill-mode-both delay-100 text-[#0F0F1A] font-extrabold text-[40px] sm:text-[56px] leading-[1.15] mb-[32px] w-full max-w-[700px] tracking-tight">
+        <h1 className="animate-fade-in-up fill-mode-both delay-100 text-[#0F0F1A] font-extrabold text-[48px] md:text-[72px] lg:text-[104px] leading-[1.15] mb-[32px] w-full max-w-[1100px] tracking-tight">
           O criador de Sistemas Internos mais intuitivo do mundo
         </h1>
 
