@@ -102,14 +102,26 @@ const Index = () => {
 
         {/* CTA Buttons */}
         <div className="animate-fade-in-up fill-mode-both delay-200 flex flex-col sm:flex-row items-center gap-[12px] w-full sm:w-auto">
-          <Button className="w-full sm:w-auto h-[48px] px-[28px] bg-[#4F46E5] hover:bg-[#4038CA] text-white rounded-full text-[16px] font-medium shadow-none transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group">
+          <Button
+            className="w-full sm:w-auto h-[48px] px-[28px] text-white text-[16px] font-medium shadow-none transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group"
+            style={{
+              borderRadius: '9999px',
+              background: 'linear-gradient(180deg, var(--Skip-Blue-Violet-600-Main, #4F46E5) 0%, var(--Skip-Blue-Violet-400, #8881F8) 100%)',
+            }}
+          >
             Começar agora
             <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Button>
 
           <Button
             variant="outline"
-            className="w-full sm:w-auto h-[48px] px-[28px] border-[1.5px] border-[#E5E7EB] text-[#374151] hover:bg-gray-50 rounded-full text-[16px] font-medium bg-white shadow-none transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group"
+            className="w-full sm:w-auto h-[48px] px-[28px] text-[#374151] text-[16px] font-medium shadow-none border-none transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group"
+            style={{
+              borderRadius: '9999px',
+              background: 'rgba(227, 228, 229, 0.60)',
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
+            }}
           >
             <Play className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" />
             Ver como funciona
