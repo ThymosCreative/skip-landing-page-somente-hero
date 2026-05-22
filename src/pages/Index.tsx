@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react'
 import { Button } from '@/components/ui/button'
-import { Play } from 'lucide-react'
 import skipLogo from '@/assets/image-dd6eb.png'
 
 const SkipIcon = () => (
@@ -128,7 +127,7 @@ const Index = () => {
         {/* CTA Buttons */}
         <div className="animate-fade-in-up fill-mode-both delay-200 flex flex-col sm:flex-row items-center gap-[12px] w-full sm:w-auto">
           <Button
-            className="w-full sm:w-auto h-[48px] px-[28px] text-white text-[16px] font-medium shadow-none transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] flex items-center gap-[10px]"
+            className="w-full sm:w-auto h-[48px] px-[28px] text-white text-[16px] font-medium font-display shadow-none transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] flex items-center gap-[10px]"
             style={{
               borderRadius: '9999px',
               background:
@@ -141,7 +140,7 @@ const Index = () => {
 
           <Button
             variant="outline"
-            className="w-full sm:w-auto h-[48px] px-[28px] text-[#374151] text-[16px] font-medium shadow-none border-none transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group"
+            className="w-full sm:w-auto h-[48px] px-[28px] text-[#374151] text-[16px] font-medium font-display shadow-none border-none transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group"
             style={{
               borderRadius: '9999px',
               background: 'rgba(227, 228, 229, 0.60)',
@@ -149,7 +148,6 @@ const Index = () => {
               WebkitBackdropFilter: 'blur(8px)',
             }}
           >
-            <Play className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" />
             Explorar casos de uso
           </Button>
         </div>
