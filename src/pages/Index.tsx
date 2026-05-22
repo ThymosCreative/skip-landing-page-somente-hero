@@ -30,7 +30,12 @@ const Index = () => {
         </div>
 
         {/* Headline */}
-        <h1 className="animate-fade-in-up fill-mode-both delay-100 text-[#0F0F1A] font-extrabold text-[48px] md:text-[72px] lg:text-[104px] leading-[1.15] mb-[32px] w-full max-w-[1100px] tracking-tight">
+        <h1
+          className="animate-fade-in-up fill-mode-both delay-100 text-[#0F0F1A] font-normal text-[48px] md:text-[72px] lg:text-[104px] leading-[1.15] lg:leading-[104px] mb-[32px] w-full max-w-[1100px] tracking-tight"
+          style={{
+            fontFamily: '"SF Pro", "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
+          }}
+        >
           O criador de Sistemas Internos mais intuitivo do mundo
         </h1>
 
