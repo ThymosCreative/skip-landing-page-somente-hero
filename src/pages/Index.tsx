@@ -106,7 +106,8 @@ const Index = () => {
             className="w-full sm:w-auto h-[48px] px-[28px] text-white text-[16px] font-medium shadow-none transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group"
             style={{
               borderRadius: '9999px',
-              background: 'linear-gradient(180deg, var(--Skip-Blue-Violet-600-Main, #4F46E5) 0%, var(--Skip-Blue-Violet-400, #8881F8) 100%)',
+              background:
+                'linear-gradient(180deg, var(--Skip-Blue-Violet-600-Main, #4F46E5) 0%, var(--Skip-Blue-Violet-400, #8881F8) 100%)',
             }}
           >
             Começar agora
