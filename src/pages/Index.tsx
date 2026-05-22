@@ -5,13 +5,7 @@ import skipLogo from '@/assets/image-dd6eb.png'
 
 const Index = () => {
   return (
-    <div
-      className="relative flex-1 flex flex-col items-center overflow-hidden w-full min-h-screen"
-      style={{
-        background:
-          'radial-gradient(ellipse 70% 50% at 50% 45%, #F0EEFF 0%, #F8F7FF 40%, #FFFFFF 75%)',
-      }}
-    >
+    <div className="relative flex-1 flex flex-col items-center overflow-hidden w-full min-h-screen">
       {/* Interactive Particle System */}
       <ParticleCanvas />
 
@@ -31,7 +25,7 @@ const Index = () => {
 
         {/* Headline */}
         <h1
-          className="animate-fade-in-up fill-mode-both delay-100 text-[#0F0F1A] font-normal text-[48px] md:text-[72px] lg:text-[104px] leading-[1.15] lg:leading-[104px] mb-[32px] w-full max-w-[1050px] tracking-tight"
+          className="animate-fade-in-up fill-mode-both delay-100 text-[#0F0F1A] font-normal text-[48px] md:text-[72px] lg:text-[104px] leading-[1.15] lg:leading-[104px] mb-[32px] w-full max-w-[1000px] tracking-tight"
           style={{
             fontFamily: '"SF Pro", "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif',
           }}
