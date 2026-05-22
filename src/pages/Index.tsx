@@ -144,8 +144,8 @@ const Index = () => {
             style={{
               borderRadius: '9999px',
               background: 'rgba(227, 228, 229, 0.60)',
-              backdropFilter: 'blur(8px)',
-              WebkitBackdropFilter: 'blur(8px)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
             }}
           >
             Explorar casos de uso
