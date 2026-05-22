@@ -1,31 +1,25 @@
 import { useEffect, useRef } from 'react'
 
 interface Particle {
-  lx: number // logical x (drift)
-  ly: number // logical y (drift)
-  x: number // actual x
-  y: number // actual y
+  lx: number
+  ly: number
+  x: number
+  y: number
   width: number
   height: number
   angle: number
   color: string
   alpha: number
-  dvx: number // drift velocity x
-  dvy: number // drift velocity y
+  dvx: number
+  dvy: number
 }
 
-const PARTICLE_COUNT = 180
+const PARTICLE_COUNT = 220
 const INTERACTION_RADIUS = 120
 
 const getParticleColor = () => {
-  const rand = Math.random()
-  if (rand < 0.5) {
-    return Math.random() < 0.5 ? '#6B63F1' : '#8881F8'
-  } else if (rand < 0.8) {
-    return '#4F46E5'
-  } else {
-    return '#AAA5FC'
-  }
+  const colors = ['#4F46E5', '#6B63F1', '#8881F8']
+  return colors[Math.floor(Math.random() * colors.length)]
 }
 
 export function ParticleCanvas() {
@@ -62,31 +56,18 @@ export function ParticleCanvas() {
         const x = Math.random() * window.innerWidth
         const y = Math.random() * window.innerHeight
 
-        const alpha = Math.random() * 0.85 + 0.15 // 0.15 to 1.0
-
-        let dvx, dvy
-        if (alpha < 0.3) {
-          const speedX = Math.random() * 0.05 + 0.1 // 0.1 to 0.15
-          const speedY = Math.random() * 0.05 + 0.1
-          dvx = Math.random() < 0.5 ? speedX : -speedX
-          dvy = Math.random() < 0.5 ? speedY : -speedY
-        } else {
-          dvx = (Math.random() - 0.5) * 0.6
-          dvy = (Math.random() - 0.5) * 0.6
-        }
-
         particlesRef.current.push({
           lx: x,
           ly: y,
           x: x,
           y: y,
-          width: Math.random() * 14 + 4, // 4px to 18px
-          height: Math.random() * 1 + 2, // 2px to 3px
-          angle: (Math.random() - 0.5) * (Math.PI / 2), // -45deg to 45deg
+          width: Math.random() * 12 + 6,
+          height: Math.random() * 1 + 2,
+          angle: (Math.random() - 0.5) * (Math.PI / 2),
           color: getParticleColor(),
-          alpha: alpha,
-          dvx: dvx,
-          dvy: dvy,
+          alpha: Math.random() * 0.7 + 0.2,
+          dvx: (Math.random() - 0.5) * 0.6,
+          dvy: (Math.random() - 0.5) * 0.6,
         })
       }
     }
@@ -107,17 +88,14 @@ export function ParticleCanvas() {
       const mouse = mouseRef.current
 
       particlesRef.current.forEach((p) => {
-        // 1. Update logical drift position
         p.lx += p.dvx
         p.ly += p.dvy
 
-        // Wrap around screen boundaries for logical position
         if (p.lx < -20) p.lx = window.innerWidth + 20
         if (p.lx > window.innerWidth + 20) p.lx = -20
         if (p.ly < -20) p.ly = window.innerHeight + 20
         if (p.ly > window.innerHeight + 20) p.ly = -20
 
-        // 2. Mouse Repulsion Calculation
         const dx = p.lx - mouse.x
         const dy = p.ly - mouse.y
         const dist = Math.sqrt(dx * dx + dy * dy)
@@ -127,16 +105,14 @@ export function ParticleCanvas() {
 
         if (dist < INTERACTION_RADIUS && dist > 0) {
           const force = (INTERACTION_RADIUS - dist) / INTERACTION_RADIUS
-          const pushAmount = force * 80 // Max 80px displacement
+          const pushAmount = force * 100
           targetX = p.lx + (dx / dist) * pushAmount
           targetY = p.ly + (dy / dist) * pushAmount
         }
 
-        // 3. Linear Interpolation to target
         p.x += (targetX - p.x) * 0.05
         p.y += (targetY - p.y) * 0.05
 
-        // 4. Draw Dash
         ctx.save()
         ctx.translate(p.x, p.y)
         ctx.rotate(p.angle)
@@ -176,7 +152,7 @@ export function ParticleCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
+      className="fixed inset-0 w-full h-full pointer-events-none z-0"
       style={{ background: 'transparent' }}
     />
   )

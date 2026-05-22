@@ -1,50 +1,45 @@
 import { ParticleCanvas } from '@/components/ParticleCanvas'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Play } from 'lucide-react'
+import { ArrowRight, Play, Hexagon } from 'lucide-react'
 
 const Index = () => {
   return (
     <div
-      className="relative flex-1 flex flex-col items-center justify-center overflow-hidden w-full h-full min-h-screen"
+      className="relative flex-1 flex flex-col items-center overflow-hidden w-full min-h-screen"
       style={{
         background:
-          'radial-gradient(ellipse 80% 60% at 50% 40%, #EEF2FF 0%, #F5F3FF 30%, #FFFFFF 70%)',
-        boxShadow: 'inset 0 0 120px 40px rgba(238, 242, 255, 0.6)',
+          'radial-gradient(ellipse 70% 50% at 50% 45%, #F0EEFF 0%, #F8F7FF 40%, #FFFFFF 75%)',
       }}
     >
-      {/* Interactive Dash Particle System */}
+      {/* Interactive Particle System */}
       <ParticleCanvas />
 
-      {/* Hero Content Container */}
-      <div className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center w-full">
-        {/* Badge */}
-        <div className="animate-fade-in-up fill-mode-both inline-flex items-center gap-1.5 px-[14px] py-[6px] rounded-full bg-[#EEF2FF] border border-[#C7D2FE] text-[#4F46E5] text-[13px] font-medium mb-8 cursor-default transition-transform hover:scale-105">
-          ✦ Agora com Gemini 3.1!
+      {/* Hero Content Cluster (Centered Vertically ~34vh-38vh) */}
+      <div
+        className="relative z-10 flex flex-col items-center text-center px-4 w-full max-w-[700px]"
+        style={{ marginTop: '36vh' }}
+      >
+        {/* Logo Lockup */}
+        <div className="animate-fade-in-up fill-mode-both flex items-center justify-center gap-[6px] text-[#0F0F1A] mb-3">
+          <Hexagon className="w-[16px] h-[16px] fill-[#0F0F1A]" />
+          <span className="font-bold text-[14px] uppercase tracking-wider">Skip</span>
         </div>
 
         {/* Headline */}
-        <h1 className="animate-fade-in-up fill-mode-both delay-100 text-[40px] sm:text-[56px] lg:text-[68px] font-extrabold tracking-tight leading-[1.1] mb-6">
-          <span className="text-[#1E1B4B] block mb-[6px]">O criador de</span>
-          <span className="text-[#1E1B4B] block">Sistemas Internos</span>
-          <span className="text-[#4F46E5] block">mais intuitivo do mundo</span>
+        <h1 className="animate-fade-in-up fill-mode-both delay-100 text-[#0F0F1A] font-extrabold text-[40px] sm:text-[56px] leading-[1.15] mb-[32px] w-full max-w-[700px] tracking-tight">
+          O criador de Sistemas Internos mais intuitivo do mundo
         </h1>
 
-        {/* Subheadline */}
-        <p className="animate-fade-in-up fill-mode-both delay-200 text-[18px] text-[#6B7280] font-normal max-w-[520px] mx-auto mb-10 leading-relaxed">
-          Transforme suas ideias em sistemas perfeitos para melhorar a eficiência dos processos da
-          sua empresa.
-        </p>
-
         {/* CTA Buttons */}
-        <div className="animate-fade-in-up fill-mode-both delay-300 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto px-4 sm:px-0">
-          <Button className="w-full sm:w-auto px-[28px] py-[14px] h-auto bg-[#4F46E5] hover:bg-[#4038CA] text-white rounded-full text-[16px] font-medium shadow-none transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group">
+        <div className="animate-fade-in-up fill-mode-both delay-200 flex flex-col sm:flex-row items-center gap-[12px] w-full sm:w-auto">
+          <Button className="w-full sm:w-auto h-[48px] px-[28px] bg-[#4F46E5] hover:bg-[#4038CA] text-white rounded-full text-[16px] font-medium shadow-none transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group">
             Começar agora
             <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Button>
 
           <Button
             variant="outline"
-            className="w-full sm:w-auto px-[28px] py-[14px] h-auto border-[1.5px] border-[#D1D5DB] text-[#374151] hover:bg-gray-50 rounded-full text-[16px] font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group bg-white shadow-none"
+            className="w-full sm:w-auto h-[48px] px-[28px] border-[1.5px] border-[#E5E7EB] text-[#374151] hover:bg-gray-50 rounded-full text-[16px] font-medium bg-white shadow-none transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group"
           >
             <Play className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" />
             Ver como funciona
