@@ -1,14 +1,36 @@
-import { ParticleCanvas } from '@/components/ParticleCanvas'
+import { useEffect, useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Play } from 'lucide-react'
 import skipLogo from '@/assets/image-dd6eb.png'
 
 const Index = () => {
-  return (
-    <div className="relative flex-1 flex flex-col items-center overflow-hidden w-full min-h-screen">
-      {/* Interactive Particle System */}
-      <ParticleCanvas />
+  const heroRef = useRef<HTMLDivElement>(null)
 
+  useEffect(() => {
+    const hero = heroRef.current
+    if (!hero) return
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = hero.getBoundingClientRect()
+      const x = ((e.clientX - rect.left) / rect.width) * 100
+      const y = ((e.clientY - rect.top) / rect.height) * 100
+
+      // Update the Houdini CSS variables
+      hero.style.setProperty('--ring-x', `${x}`)
+      hero.style.setProperty('--ring-y', `${y}`)
+    }
+
+    hero.addEventListener('mousemove', handleMouseMove)
+    return () => {
+      hero.removeEventListener('mousemove', handleMouseMove)
+    }
+  }, [])
+
+  return (
+    <div
+      ref={heroRef}
+      className="hero relative flex-1 flex flex-col items-center overflow-hidden w-full min-h-screen"
+    >
       {/* Hero Content Cluster (Centered Vertically ~34vh-38vh) */}
       <div
         className="relative z-10 flex flex-col items-center text-center px-4 w-full max-w-[1100px]"

@@ -84,6 +84,93 @@
   }
 }
 
+@property --ring-radius {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 300;
+}
+@property --ring-thickness {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 700;
+}
+@property --ring-x {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 50;
+}
+@property --ring-y {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 50;
+}
+@property --particle-count {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 120;
+}
+@property --particle-rows {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 30;
+}
+@property --particle-size {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 2;
+}
+@property --particle-color {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #4f46e5;
+}
+@property --particle-min-alpha {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0.1;
+}
+@property --particle-max-alpha {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 1;
+}
+@property --animation-tick {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+@property --seed {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 42;
+}
+
+@keyframes ring-rotate {
+  from {
+    --animation-tick: 0;
+  }
+  to {
+    --animation-tick: 1;
+  }
+}
+
+.hero {
+  background-image: paint(ring-particles);
+  background-color: #ffffff;
+  --ring-radius: 280;
+  --ring-thickness: 650;
+  --particle-count: 120;
+  --particle-rows: 30;
+  --particle-size: 2;
+  --particle-color: #4f46e5;
+  --particle-min-alpha: 0.15;
+  --particle-max-alpha: 0.85;
+  --ring-x: 50;
+  --ring-y: 48;
+  --seed: 137;
+  animation: ring-rotate 12s linear infinite;
+}
+
 body {
   font-family: var(--font-sans);
   background-color: hsl(var(--background));

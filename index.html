@@ -12,6 +12,16 @@
 
   <body>
     <div id="root"></div>
+    <script type="module">
+      (async function() {
+        if (typeof CSS === 'undefined' || !('paintWorklet' in CSS)) {
+          await import('https://unpkg.com/css-paint-polyfill');
+        }
+        if (typeof CSS !== 'undefined' && 'paintWorklet' in CSS) {
+          CSS.paintWorklet.addModule('https://unpkg.com/css-houdini-ringparticles/dist/ringparticles.js');
+        }
+      })();
+    </script>
     <!-- @skip-protected: Do not remove. Required for app features. -->
     <script src="https://goskip.dev/skip.js"></script>
     <!-- @skip-protected: Do not remove. App entrypoint. -->
