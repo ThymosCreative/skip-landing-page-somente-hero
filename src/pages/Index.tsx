@@ -10,19 +10,47 @@ const Index = () => {
     const hero = heroRef.current
     if (!hero) return
 
+    let mouseX = -9999
+    let mouseY = -9999
+    let smoothX = -9999
+    let smoothY = -9999
+    let velX = 0
+    let velY = 0
+    let animationFrameId: number
+
     const handleMouseMove = (e: MouseEvent) => {
       const rect = hero.getBoundingClientRect()
-      const x = ((e.clientX - rect.left) / rect.width) * 100
-      const y = ((e.clientY - rect.top) / rect.height) * 100
+      mouseX = ((e.clientX - rect.left) / rect.width) * 100
+      mouseY = ((e.clientY - rect.top) / rect.height) * 100
+    }
 
-      // Update the Houdini CSS variables
-      hero.style.setProperty('--ring-x', `${x}`)
-      hero.style.setProperty('--ring-y', `${y}`)
+    const updateLoop = () => {
+      if (mouseX !== -9999) {
+        if (smoothX === -9999) {
+          smoothX = mouseX
+          smoothY = mouseY
+        }
+
+        velX += (mouseX - smoothX) * 0.04
+        velY += (mouseY - smoothY) * 0.04
+        velX *= 0.82
+        velY *= 0.82
+        smoothX += velX
+        smoothY += velY
+
+        hero.style.setProperty('--ring-x', `${smoothX}`)
+        hero.style.setProperty('--ring-y', `${smoothY}`)
+      }
+
+      animationFrameId = requestAnimationFrame(updateLoop)
     }
 
     hero.addEventListener('mousemove', handleMouseMove)
+    animationFrameId = requestAnimationFrame(updateLoop)
+
     return () => {
       hero.removeEventListener('mousemove', handleMouseMove)
+      cancelAnimationFrame(animationFrameId)
     }
   }, [])
 
