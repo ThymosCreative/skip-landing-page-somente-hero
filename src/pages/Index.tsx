@@ -17,7 +17,7 @@ const Index = () => {
     let velX = 0
     let velY = 0
     let autoAngle = 0
-    let autoRadius = 180
+    let autoRadius = 40
     let animationFrameId: number
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -27,7 +27,7 @@ const Index = () => {
     }
 
     const updateLoop = () => {
-      autoAngle += 0.003
+      autoAngle += 0.0008
 
       const autoX = 50 + Math.cos(autoAngle) * autoRadius
       const autoY = 50 + Math.sin(autoAngle * 0.7) * autoRadius * 0.6
@@ -38,8 +38,8 @@ const Index = () => {
         targetX = autoX
         targetY = autoY
       } else {
-        targetX = mouseX * 0.6 + autoX * 0.4
-        targetY = mouseY * 0.6 + autoY * 0.4
+        targetX = mouseX * 0.85 + autoX * 0.15
+        targetY = mouseY * 0.85 + autoY * 0.15
       }
 
       velX += (targetX - smoothX) * 0.012
