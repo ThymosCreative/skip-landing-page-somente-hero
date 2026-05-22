@@ -1,18 +1,22 @@
 import { useEffect, useRef } from 'react'
 
 interface Particle {
-  x: number
-  y: number
-  size: number
+  lx: number // logical x (drift)
+  ly: number // logical y (drift)
+  x: number // actual x
+  y: number // actual y
+  width: number
+  height: number
+  angle: number
   color: string
-  baseVx: number
-  baseVy: number
-  vx: number
-  vy: number
   alpha: number
+  dvx: number // drift velocity x
+  dvy: number // drift velocity y
 }
 
-const COLORS = ['#4F46E5', '#6B63F1', '#AAA5FC', '#4038CA']
+const COLORS = ['#4F46E5', '#6B63F1', '#8881F8', '#AAA5FC', '#4038CA']
+const PARTICLE_COUNT = 180
+const INTERACTION_RADIUS = 120
 
 export function ParticleCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -35,24 +39,31 @@ export function ParticleCanvas() {
       ctx.scale(dpr, dpr)
       canvas.style.width = `${window.innerWidth}px`
       canvas.style.height = `${window.innerHeight}px`
-      initParticles()
+
+      if (particlesRef.current.length === 0) {
+        initParticles()
+      }
     }
 
     const initParticles = () => {
-      const particleCount = window.innerWidth < 768 ? 60 : 150
       particlesRef.current = []
 
-      for (let i = 0; i < particleCount; i++) {
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        const x = Math.random() * window.innerWidth
+        const y = Math.random() * window.innerHeight
+
         particlesRef.current.push({
-          x: Math.random() * window.innerWidth,
-          y: Math.random() * window.innerHeight,
-          size: Math.random() * 2.5 + 0.5,
+          lx: x,
+          ly: y,
+          x: x,
+          y: y,
+          width: Math.random() * 8 + 6, // 6px to 14px
+          height: Math.random() * 1 + 2, // 2px to 3px
+          angle: (Math.random() - 0.5) * (Math.PI / 2), // -45deg to 45deg
           color: COLORS[Math.floor(Math.random() * COLORS.length)],
-          baseVx: (Math.random() - 0.5) * 0.5,
-          baseVy: (Math.random() - 0.5) * 0.5,
-          vx: 0,
-          vy: 0,
-          alpha: Math.random() * 0.6 + 0.2,
+          alpha: Math.random() * 0.6 + 0.3, // 0.3 to 0.9
+          dvx: (Math.random() - 0.5) * 0.6, // max speed roughly 0.3px per frame
+          dvy: (Math.random() - 0.5) * 0.6,
         })
       }
     }
@@ -73,47 +84,53 @@ export function ParticleCanvas() {
       const mouse = mouseRef.current
 
       particlesRef.current.forEach((p) => {
-        // Calculate distance from mouse
-        const dx = mouse.x - p.x
-        const dy = mouse.y - p.y
-        const distance = Math.sqrt(dx * dx + dy * dy)
+        // 1. Update logical drift position
+        p.lx += p.dvx
+        p.ly += p.dvy
 
-        // Interaction radius
-        const interactionRadius = 180
+        // Wrap around screen boundaries for logical position
+        if (p.lx < -20) p.lx = window.innerWidth + 20
+        if (p.lx > window.innerWidth + 20) p.lx = -20
+        if (p.ly < -20) p.ly = window.innerHeight + 20
+        if (p.ly > window.innerHeight + 20) p.ly = -20
 
-        if (distance < interactionRadius) {
-          const forceDirectionX = dx / distance
-          const forceDirectionY = dy / distance
-          const force = (interactionRadius - distance) / interactionRadius
+        // 2. Mouse Repulsion Calculation
+        const dx = p.lx - mouse.x
+        const dy = p.ly - mouse.y
+        const dist = Math.sqrt(dx * dx + dy * dy)
 
-          // Repulse
-          p.vx -= forceDirectionX * force * 0.4
-          p.vy -= forceDirectionY * force * 0.4
+        let targetX = p.lx
+        let targetY = p.ly
+
+        if (dist < INTERACTION_RADIUS && dist > 0) {
+          const force = (INTERACTION_RADIUS - dist) / INTERACTION_RADIUS
+          const pushAmount = force * 80 // Max 80px displacement
+          targetX = p.lx + (dx / dist) * pushAmount
+          targetY = p.ly + (dy / dist) * pushAmount
         }
 
-        // Apply friction and return to base velocity
-        p.vx += (p.baseVx - p.vx) * 0.05
-        p.vy += (p.baseVy - p.vy) * 0.05
+        // 3. Linear Interpolation to target
+        p.x += (targetX - p.x) * 0.05
+        p.y += (targetY - p.y) * 0.05
 
-        // Update position
-        p.x += p.vx
-        p.y += p.vy
-
-        // Wrap around screen
-        if (p.x < 0) p.x = window.innerWidth
-        if (p.x > window.innerWidth) p.x = 0
-        if (p.y < 0) p.y = window.innerHeight
-        if (p.y > window.innerHeight) p.y = 0
-
-        // Draw particle
-        ctx.beginPath()
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
-        ctx.fillStyle = p.color
+        // 4. Draw Dash
+        ctx.save()
+        ctx.translate(p.x, p.y)
+        ctx.rotate(p.angle)
         ctx.globalAlpha = p.alpha
+        ctx.fillStyle = p.color
+        ctx.beginPath()
+
+        if (ctx.roundRect) {
+          ctx.roundRect(-p.width / 2, -p.height / 2, p.width, p.height, 2)
+        } else {
+          ctx.rect(-p.width / 2, -p.height / 2, p.width, p.height)
+        }
+
         ctx.fill()
+        ctx.restore()
       })
 
-      ctx.globalAlpha = 1
       animationFrameId = requestAnimationFrame(draw)
     }
 
@@ -133,5 +150,11 @@ export function ParticleCanvas() {
     }
   }, [])
 
-  return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0 bg-transparent" />
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 pointer-events-none z-0"
+      style={{ background: 'transparent' }}
+    />
+  )
 }

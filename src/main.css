@@ -1,6 +1,6 @@
 /* Global styles - Theme, font, utilities, animations and global components */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -39,8 +39,8 @@
 
     --radius: 0.5rem;
 
-    --font-sans: 'Plus Jakarta Sans', sans-serif;
-    --font-display: 'Sora', sans-serif;
+    --font-sans: 'DM Sans', sans-serif;
+    --font-display: 'DM Sans', sans-serif;
   }
 
   /* Force light mode for this specific landing page requirement */
