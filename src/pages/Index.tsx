@@ -1,29 +1,14 @@
 import { useEffect, useRef } from 'react'
-import { Button } from '@/components/ui/button'
+import { Play } from 'lucide-react'
 import skipLogo from '@/assets/image-dd6eb.png'
 
 const SkipIcon = () => (
   <svg width="18" height="18" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path
-      d="M14.0261 23.5879C13.4069 24.2071 13.059 25.0471 13.059 25.9228V30.8395L3.31812 25.2174C2.92862 24.9926 2.5961 24.6951 2.33374 24.3476L12.8487 17.2637C13.2576 16.9881 13.7398 16.8408 14.2328 16.8408H20.7732L14.0261 23.5879Z"
-      fill="white"
-    />
-    <path
-      d="M22.7602 17.1891L22.8188 17.1273C22.7999 17.1482 22.7803 17.169 22.7602 17.1891Z"
-      fill="white"
-    />
-    <path
-      d="M13.059 6.1201C13.059 6.99584 13.4069 7.83581 14.0261 8.45507L20.7608 15.1898H14.2328C13.411 15.1898 12.6077 15.435 11.9262 15.8942L1.69474 22.7874C1.67621 22.6461 1.66675 22.5025 1.66675 22.3577V9.66047C1.6668 8.48065 2.29629 7.39024 3.31812 6.80044L13.059 1.17837V6.1201Z"
-      fill="white"
-    />
-    <path
-      d="M22.9718 16.93L22.9246 16.9977C22.9472 16.9669 22.9681 16.9349 22.9884 16.903C22.9828 16.9118 22.9775 16.9212 22.9718 16.93Z"
-      fill="white"
-    />
-    <path
-      d="M14.71 0.249423C15.6495 -0.138207 16.7255 -0.0740628 17.6198 0.442131L28.6198 6.79142C29.6417 7.38123 30.2712 8.47157 30.2712 9.65144V22.3487C30.2711 23.5285 29.6417 24.6186 28.6198 25.2084L17.6198 31.5577C16.7255 32.0739 15.6495 32.1381 14.71 31.7504V25.9226C14.71 25.4847 14.8841 25.0646 15.1937 24.755L22.7598 17.1892C23.4045 16.5445 23.4044 15.499 22.7598 14.8542L15.1937 7.28816C14.8841 6.97853 14.71 6.55841 14.71 6.12052V0.249423Z"
-      fill="white"
-    />
+    <path d="M14.0261 23.5879C13.4069 24.2071 13.059 25.0471 13.059 25.9228V30.8395L3.31812 25.2174C2.92862 24.9926 2.5961 24.6951 2.33374 24.3476L12.8487 17.2637C13.2576 16.9881 13.7398 16.8408 14.2328 16.8408H20.7732L14.0261 23.5879Z" fill="white"/>
+    <path d="M22.7602 17.1891L22.8188 17.1273C22.7999 17.1482 22.7803 17.169 22.7602 17.1891Z" fill="white"/>
+    <path d="M13.059 6.1201C13.059 6.99584 13.4069 7.83581 14.0261 8.45507L20.7608 15.1898H14.2328C13.411 15.1898 12.6077 15.435 11.9262 15.8942L1.69474 22.7874C1.67621 22.6461 1.66675 22.5025 1.66675 22.3577V9.66047C1.6668 8.48065 2.29629 7.39024 3.31812 6.80044L13.059 1.17837V6.1201Z" fill="white"/>
+    <path d="M22.9718 16.93L22.9246 16.9977C22.9472 16.9669 22.9681 16.9349 22.9884 16.903C22.9828 16.9118 22.9775 16.9212 22.9718 16.93Z" fill="white"/>
+    <path d="M14.71 0.249423C15.6495 -0.138207 16.7255 -0.0740628 17.6198 0.442131L28.6198 6.79142C29.6417 7.38123 30.2712 8.47157 30.2712 9.65144V22.3487C30.2711 23.5285 29.6417 24.6186 28.6198 25.2084L17.6198 31.5577C16.7255 32.0739 15.6495 32.1381 14.71 31.7504V25.9226C14.71 25.4847 14.8841 25.0646 15.1937 24.755L22.7598 17.1892C23.4045 16.5445 23.4044 15.499 22.7598 14.8542L15.1937 7.28816C14.8841 6.97853 14.71 6.55841 14.71 6.12052V0.249423Z" fill="white"/>
   </svg>
 )
 
@@ -98,7 +83,7 @@ const Index = () => {
   return (
     <div
       ref={heroRef}
-      className="hero relative flex-1 flex flex-col items-center overflow-hidden w-full min-h-screen"
+      className="hero relative flex-1 flex flex-col items-center w-full min-h-screen"
     >
       {/* Hero Content Cluster (Centered Vertically ~34vh-38vh) */}
       <div
@@ -126,30 +111,36 @@ const Index = () => {
 
         {/* CTA Buttons */}
         <div className="animate-fade-in-up fill-mode-both delay-200 flex flex-col sm:flex-row items-center gap-[12px] w-full sm:w-auto">
-          <Button
-            className="w-full sm:w-auto h-[48px] px-[28px] text-white text-[16px] font-medium font-display shadow-none transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] flex items-center gap-[10px]"
+
+          {/* Botão primário — gradiente */}
+          <button
+            className="w-full sm:w-auto h-[48px] px-[28px] text-white text-[16px] font-medium shadow-none transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-[10px] cursor-pointer"
             style={{
               borderRadius: '9999px',
-              background:
-                'linear-gradient(180deg, var(--Skip-Blue-Violet-600-Main, #4F46E5) 0%, var(--Skip-Blue-Violet-400, #8881F8) 100%)',
+              background: 'linear-gradient(180deg, var(--Skip-Blue-Violet-600-Main, #4F46E5) 0%, var(--Skip-Blue-Violet-400, #8881F8) 100%)',
+              border: 'none',
             }}
           >
             <SkipIcon />
             Quero fazer parte
-          </Button>
+          </button>
 
-          <Button
-            variant="outline"
-            className="w-full sm:w-auto h-[48px] px-[28px] text-[#374151] text-[16px] font-medium font-display shadow-none border-none transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group"
+          {/* Botão secundário — glass */}
+          <button
+            className="w-full sm:w-auto h-[48px] px-[28px] text-[16px] font-medium shadow-none transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-[8px] cursor-pointer"
             style={{
               borderRadius: '9999px',
               background: 'rgba(227, 228, 229, 0.60)',
-              backdropFilter: 'blur(16px)',
-              WebkitBackdropFilter: 'blur(16px)',
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
+              border: 'none',
+              color: '#374151',
             }}
           >
+            <Play className="h-4 w-4" />
             Explorar casos de uso
-          </Button>
+          </button>
+
         </div>
       </div>
     </div>
